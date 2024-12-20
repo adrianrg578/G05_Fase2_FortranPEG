@@ -48,7 +48,13 @@ varios = ("!"/"$"/"@"/"&")
 
 expresiones  =  id:identificador { usos.push(id) }
                 / val:$literales  iscase:"i"? {
-                    return new n.String(val, iscase);
+                    console.log(val.replace(/['"]/g,''));
+                    let caseinsen = false;
+                    if(iscase != null){
+                        caseinsen = true;
+                    }
+                    console.log(caseinsen);
+                    return new n.String(val.replace(/['"]/g,''), caseinsen);
                 }
                 / "(" _ opciones _ ")"
                 / corchetes "i"?

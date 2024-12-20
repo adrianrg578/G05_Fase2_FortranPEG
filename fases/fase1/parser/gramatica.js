@@ -293,7 +293,13 @@ function peg$parse(input, options) {
 };
   var peg$f5 = function(id) { usos.push(id) };
   var peg$f6 = function(val, iscase) {
-                    return new n.String(val, iscase);
+                    console.log(val.replace(/['"]/g,''));
+                    let caseinsen = false;
+                    if(iscase != null){
+                        caseinsen = true;
+                    }
+                    console.log(caseinsen);
+                    return new n.String(val.replace(/['"]/g,''), caseinsen);
                 };
   var peg$f7 = function(contenido) {
         return `Entrada válida: [${input}]`;
