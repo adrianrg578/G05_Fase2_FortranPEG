@@ -47,7 +47,11 @@ const analizar = () => {
             return
         }else{
             salida.setValue("Análisis Exitoso");
+<<<<<<< HEAD
             // salida.setValue(cst)
+=======
+            //salida.setValue(cst)
+>>>>>>> 6086a797122ed16076853156c19dddb25e4c26bc
         }
 
         // salida.setValue("Análisis Exitoso");
