@@ -7,8 +7,7 @@
     import { ids, usos} from '../index.js'
     import { ErrorReglas } from './error.js';
     import { errores } from '../index.js'
-
-    import * as n from '../visitor/CST.js';
+    import * as n from '../visitor/cst.js'
 }}
 
 gramatica
