@@ -6,45 +6,84 @@ import path from 'node:path';
 import nodes from './Nodes.js';
 
 const __dirname = import.meta.dirname;
-const classesDestination = '../visitor/CST.js';
+const classesDestination = '../visitor/cst.js';
 const visitorDestination = '../visitor/Visitor.js';
 
 let codeString = `
 // Auto-generated
-import Node from './Node.js';
 
-export default class Visitor{
+/** @typedef {import('./Node.js').default} Node*/
 
-`;
-for (const node of Object.keys(nodes)) {
-    codeString += `\tvisit${node}(node) {} ; \n`;
+/** @template T */
+export default class Visitor {
+    ${Object.keys(nodes)
+        .map(
+            (node) => `
+        /**
+         * @abstract
+         * @param {Node} node
+         * @returns {T}
+         */
+        visit${node}(node){
+            throw new Error('Implement in subclass');
+        }`
+        )
+        .join('\n\t')}
 }
-codeString += `}`;
-
+`;
 writeFileSync(path.join(__dirname, visitorDestination), codeString);
 console.log('Generated visitor Interface');
 
 codeString = `
 // Auto-generated
-import Node from './Node.js';
 
-`;
-for (const [name, args] of Object.entries(nodes)) {
-    
-    codeString += `
-export class ${name} extends Node {
-    constructor(${args.join(', ')}) {
-        super();
-        ${args.map((arg) => `this.${arg} = ${arg};`).join('\n\t\t')}
+/**
+ * @template T
+ * @typedef {import('./Visitor.js').default<T>} Visitor
+ */
+/**
+ * @typedef {import('./Node.js').default} Node
+ */
+
+${Object.entries(nodes)
+    .map(([node, args]) => {
+        const declaration = `
+/**
+ * @implements {Node}
+ */
+export class ${node} {
+    /**
+     *
+    ${Object.entries(args)
+        .map(
+            ([arg, type]) =>
+                ` * @param {${
+                    type.startsWith('?') ? type.slice(1) + '=' : type
+                }} ${arg}`
+        )
+        .join('\n\t')}
+     */
+    constructor(${Object.keys(args).join(', ')}) {
+        ${Object.keys(args)
+            .map((arg) => `this.${arg} = ${arg};`)
+            .join('\n\t\t')}
     }
 
-    accept(visitor){
-        return visitor.visit${name}(this) ;
+    /**
+     * @template T
+     * @param {Visitor<T>} visitor
+     * @returns {T}
+     */
+    accept(visitor) {
+        return visitor.visit${node}(this);
     }
 }
     `;
-    console.log(`Generating ${name} node`);
-}
+        console.log(`Generated ${node} class`);
+        return declaration;
+    })
+    .join('\n')}
+`;
 
 writeFileSync(path.join(__dirname, classesDestination), codeString);
 console.log('Done!');

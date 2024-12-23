@@ -1,11 +1,15 @@
+/** @type {{[node: string]: {[arg: string]: string}}} */
 const nodes = {
-    Producciones :['id','expr','alias'],
-    Opciones: ['exprs'],
-    Union: ['exprs'],
-    Expresion: ['expr','qty'],
-    Expresiones: ['val','iscase'],      //regla a factorizar
-    String:['val','iscase'],
-    Identificador:['val','iscase']
+    Producciones: { id: 'string', expr: 'Opciones', alias: '?string' },
+    Opciones: { exprs: 'Union[]' },
+    Union: { exprs: 'Expresion[]' },
+    Expresion: { expr: 'Node', label: '?string', qty: '?string' },
+    String: { val: 'string', isCase: '?boolean' },
+    Clase: { chars: '(string|Rango)[]', isCase: '?boolean' },
+    Rango: { bottom: 'string', top: 'string' },
+    Identificador: { id: 'string' },
+    Punto: {},
+    Fin: {},
 };
 
 export default nodes;

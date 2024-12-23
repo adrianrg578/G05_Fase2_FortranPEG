@@ -22,6 +22,7 @@ gramatica = _ prods:producciones+ _ {
     if (noEncontrados.length > 0) {
         errores.push(new ErrorReglas("Regla no encontrada: " + noEncontrados[0]));
     }
+    //console.log(prods);
     return prods;
 }
 
@@ -31,11 +32,17 @@ producciones = _ id:identificador _ alias:(literales)? _ "=" _ expr:opciones (_"
                 }
 
 opciones = expr:union rest:(_ "/" _ @union)*{
+    //const listaopciones = [expr, ...rest];
+    //console.log("----- viendo lista de opciones ----")
+    //console.log(listaopciones);
     return new n.Opciones([expr, ...rest]);
 }
 
-union = expr:expresion rest:(_ expresion !(_ literales? _ "=") )*{
-    return new n.Union([expr, ...rest]);
+union = expr:expresion l_expr:(_ @expresion !(_ literales? _ "=") )*{
+        const lista_uniones = [expr, ...l_expr];
+        console.log("----- viendo lista de uniones ----")
+        console.log(lista_uniones);
+        return new n.Union([expr, ...l_expr]);
 }
 
 expresion = ("@")? _ id:(identificador _ ":")?_ varios? _ expr:expresiones _ qty:$([?+*]/conteo)?

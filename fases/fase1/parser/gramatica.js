@@ -276,6 +276,7 @@ function peg$parse(input, options) {
     if (noEncontrados.length > 0) {
         errores.push(new ErrorReglas("Regla no encontrada: " + noEncontrados[0]));
     }
+    //console.log(prods);
     return prods;
 };
   var peg$f1 = function(id, alias, expr) {
@@ -283,10 +284,16 @@ function peg$parse(input, options) {
                     return new n.Producciones(id,expr,alias)
                 };
   var peg$f2 = function(expr, rest) {
+    //const listaopciones = [expr, ...rest];
+    //console.log("----- viendo lista de opciones ----")
+    //console.log(listaopciones);
     return new n.Opciones([expr, ...rest]);
 };
-  var peg$f3 = function(expr, rest) {
-    return new n.Union([expr, ...rest]);
+  var peg$f3 = function(expr, l_expr) {
+        const lista_uniones = [expr, ...l_expr];
+        console.log("----- viendo lista de uniones ----")
+        console.log(lista_uniones);
+        return new n.Union([expr, ...l_expr]);
 };
   var peg$f4 = function(id, expr, qty) {
     return new n.Expresion(expr,qty);
@@ -669,8 +676,7 @@ function peg$parse(input, options) {
           s6 = peg$FAILED;
         }
         if (s6 !== peg$FAILED) {
-          s4 = [s4, s5, s6];
-          s3 = s4;
+          s3 = s5;
         } else {
           peg$currPos = s3;
           s3 = peg$FAILED;
@@ -716,8 +722,7 @@ function peg$parse(input, options) {
             s6 = peg$FAILED;
           }
           if (s6 !== peg$FAILED) {
-            s4 = [s4, s5, s6];
-            s3 = s4;
+            s3 = s5;
           } else {
             peg$currPos = s3;
             s3 = peg$FAILED;
