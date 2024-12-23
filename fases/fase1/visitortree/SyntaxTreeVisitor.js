@@ -37,11 +37,11 @@ export default class SyntaxTreeVisitor{
     }
 
     visitClase(node){
-        // return new Syntax.Hoja(node.chars.join('')); //esta clase no esta implementada aun
+        return new Syntax.Hoja(node.chars.join('')); //esta clase no esta implementada aun
     }
 
     visitRango(node){
-        // return `${node.bottom}-${node.top}`; // esta parte del rango no esta implementada
+        return `${node.bottom}-${node.top}`; // esta parte del rango no esta implementada
     }
 
     visitIdentificador(node){

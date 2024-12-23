@@ -38,7 +38,7 @@ const analizar = () => {
     usos.length = 0
     errores.length = 0
     try {
-        const cst = parse(entrada)
+        cst = parse(entrada)
 
         if(errores.length > 0){
             salida.setValue(
@@ -47,7 +47,7 @@ const analizar = () => {
             return
         }else{
             salida.setValue("Análisis Exitoso");
-            salida.setValue(cst)
+            // salida.setValue(cst)
         }
 
         // salida.setValue("Análisis Exitoso");
