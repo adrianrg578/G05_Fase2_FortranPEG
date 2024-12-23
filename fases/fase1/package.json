@@ -1,0 +1,17 @@
+{
+  "name": "fase1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "peggy --format es -o parser/gramatica.js parser/gramatica.pegjs",
+    "bootstrap": "node tools/generator.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "peggy": "^4.2.0"
+  }
+}

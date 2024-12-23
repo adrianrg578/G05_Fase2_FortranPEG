@@ -1,5 +1,5 @@
 import Visitor from "../visitor/Visitor.js";
-import { Rango } from "../visitor/cst.js";
+import { Rango } from "../visitor/CST.js";
 import { generateCaracteres } from "./utils.js";
 
 export default class Tokenizer extends Visitor{
@@ -45,11 +45,26 @@ export default class Tokenizer extends Visitor{
     } ; 
     //falta implementar
     visitClase(node){
-
+        return `
+    i = cursor
+    ${generateCaracteres(
+        node.chars.filter((node) => typeof node === 'string')
+    )}
+    ${node.chars
+        .filter((node) => node instanceof Rango)
+        .map((range) => range.accept(this))
+        .join('\n')}
+        `;
     }
     // falta implementar
     visitRango(node){
-
+        return `
+    if (input(i:i) >= "${node.bottom}" .and. input(i:i) <= "${node.top}") then
+        lexeme = input(cursor:i)
+        cursor = i + 1
+        return
+    end if
+        `;
     }
     visitIdentificador(){
         return '';

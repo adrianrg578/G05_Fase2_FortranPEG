@@ -1,4 +1,4 @@
-import { Opciones } from "../visitor/cst";
+import { Opciones } from "../visitor/CST.js";
 
 class Node{
     constructor(){
