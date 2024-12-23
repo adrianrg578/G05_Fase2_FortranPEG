@@ -130,7 +130,7 @@ secuenciaFinLinea = "\r\n" / "\n" / "\r" / "\u2028" / "\u2029"
 //     "\"" [^"]* "\""
 //     / "'" [^']* "'"
     
-numero = [0-9]+
+numero = [0-9]+ {return text()}  
 
 identificador = [_a-z]i[_a-z0-9]i* { return text() }
 
