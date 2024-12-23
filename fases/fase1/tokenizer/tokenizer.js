@@ -57,14 +57,28 @@ export default class Tokenizer extends Visitor{
         `;
     }
     // falta implementar
-    visitRango(node){
-        return `
+    visitRango(node){ 
+        const rango = `
     if (input(i:i) >= "${node.bottom}" .and. input(i:i) <= "${node.top}") then
         lexeme = input(cursor:i)
         cursor = i + 1
         return
     end if
-        `;
+        `
+
+        const rangoInsensitive = `
+    if (to_lower (input(i:i)) >= to_lower ("${node.bottom}") .and. to_lower (input(i:i)) <= to_lower ("${node.top}")) then
+        lexeme = input(cursor:i)
+        cursor = i + 1
+        return
+    end if
+        `
+    if(node.iscase){
+        return rango
+    }else{
+        return rangoInsensitive;
+    }
+        ;
     }
     visitIdentificador(){
         return '';

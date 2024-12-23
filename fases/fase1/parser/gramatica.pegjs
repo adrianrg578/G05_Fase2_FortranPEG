@@ -60,7 +60,15 @@ expresiones
   }
   / "(" _ @opciones _ ")"
   / chars:clase isCase:"i"? {
-    return new n.Clase(chars, isCase);
+    let bandera = false
+    if (isCase == null) {
+      bandera = false
+    }
+    else
+    {
+      bandera = true
+    }
+    return new n.Clase(chars, bandera);
   }
   / "." {
     return new n.Punto();

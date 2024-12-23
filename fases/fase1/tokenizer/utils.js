@@ -11,6 +11,7 @@ export async function generateTokenizer(grammar) {
             character(len=*), intent(in) :: input
             integer, intent(inout) :: cursor
             character(len=:), allocatable :: lexeme
+            integer :: i
     
             if(cursor > len(input)) then
                 allocate( character(len = 3) :: lexeme)

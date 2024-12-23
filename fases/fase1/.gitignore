@@ -132,3 +132,7 @@ dist
 #node
 package-lock.json
 package.json
+
+#tools
+tools/
+Automaton/
