@@ -60,7 +60,7 @@ export default class Tokenizer extends Visitor{
     visitRango(node){ 
         const rango = `
     if (input(i:i) >= "${node.bottom}" .and. input(i:i) <= "${node.top}") then
-        lexeme = input(cursor:i)
+        lexeme = input(cursor:i) // " (rango)"
         cursor = i + 1
         return
     end if
@@ -68,7 +68,7 @@ export default class Tokenizer extends Visitor{
 
         const rangoInsensitive = `
     if (to_lower (input(i:i)) >= to_lower ("${node.bottom}") .and. to_lower (input(i:i)) <= to_lower ("${node.top}")) then
-        lexeme = input(cursor:i)
+        lexeme = input(cursor:i) // " (rangoI)"
         cursor = i + 1
         return
     end if

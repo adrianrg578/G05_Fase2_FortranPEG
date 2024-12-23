@@ -315,11 +315,26 @@ function peg$parse(input, options) {
   var peg$f10 = function(bottom, top) {
     return new n.Rango(bottom, top);
   };
-  var peg$f11 = function() {
+  var peg$f11 = function(valor) {
+    if (!isNaN(valor)) {
+    //console.log(`${valor} es un número.`);
+    return parseInt(valor, 10);
 
+  }
+      return valor;
   };
-  var peg$f12 = function(num) {return parseInt(num, 10)};
-  var peg$f13 = function() { return text() };
+  var peg$f12 = function(valor) {
+    if (!isNaN(valor)) {
+    //console.log(`${valor} es un número.`);
+    return parseInt(valor, 10);
+  }
+    return valor;
+  };
+  var peg$f13 = function(num) {
+  const imp= parseInt(num,10);
+  console.log(imp);
+  return parseInt(num, 10)};
+  var peg$f14 = function() { return text() };
   var peg$currPos = options.peg$currPos | 0;
   var peg$savedPos = peg$currPos;
   var peg$posDetailsCache = [{ line: 1, column: 1 }];
@@ -1327,7 +1342,7 @@ function peg$parse(input, options) {
     }
     if (s1 !== peg$FAILED) {
       peg$savedPos = s0;
-      s1 = peg$f11();
+      s1 = peg$f11(s1);
     }
     s0 = s1;
     if (s0 === peg$FAILED) {
@@ -1348,8 +1363,8 @@ function peg$parse(input, options) {
           if (peg$silentFails === 0) { peg$fail(peg$e20); }
         }
         if (s2 !== peg$FAILED) {
-          s1 = [s1, s2];
-          s0 = s1;
+          peg$savedPos = s0;
+          s0 = peg$f12(s1);
         } else {
           peg$currPos = s0;
           s0 = peg$FAILED;
@@ -1687,7 +1702,7 @@ function peg$parse(input, options) {
     }
     if (s1 !== peg$FAILED) {
       peg$savedPos = s0;
-      s1 = peg$f12(s1);
+      s1 = peg$f13(s1);
     }
     s0 = s1;
 
@@ -1725,7 +1740,7 @@ function peg$parse(input, options) {
         }
       }
       peg$savedPos = s0;
-      s0 = peg$f13();
+      s0 = peg$f14();
     } else {
       peg$currPos = s0;
       s0 = peg$FAILED;

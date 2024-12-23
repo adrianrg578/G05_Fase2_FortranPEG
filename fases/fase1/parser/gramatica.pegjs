@@ -102,10 +102,21 @@ contenidoClase
   / $caracter
 
 caracter
-  = [^\[\]\\]{
+  = valor:[^\[\]\\]{
+    if (!isNaN(valor)) {
+    //console.log(`${valor} es un número.`);
+    return parseInt(valor, 10);
 
   }
-  / "\\" .
+      return valor;
+  }
+  / valor:"\\" .{
+    if (!isNaN(valor)) {
+    //console.log(`${valor} es un número.`);
+    return parseInt(valor, 10);
+  }
+    return valor;
+  }
 
 literales
   = '"' @stringDobleComilla* '"'
@@ -140,7 +151,10 @@ secuenciaFinLinea = "\r\n" / "\n" / "\r" / "\u2028" / "\u2029"
 //     "\"" [^"]* "\""
 //     / "'" [^']* "'"
     
-numero = num:$[0-9]+ {return parseInt(num, 10)}
+numero = num:$[0-9]+ {
+  const imp= parseInt(num,10);
+  console.log(imp);
+  return parseInt(num, 10)}
 
 identificador = [_a-z]i[_a-z0-9]i* { return text() }
 
