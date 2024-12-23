@@ -6,7 +6,7 @@ import path from 'node:path';
 import nodes from './Nodes.js';
 
 const __dirname = import.meta.dirname;
-const classesDestination = '../visitor/cst.js';
+const classesDestination = '../visitor/CST.js';
 const visitorDestination = '../visitor/Visitor.js';
 
 let codeString = `

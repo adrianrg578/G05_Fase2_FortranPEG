@@ -1,4 +1,4 @@
-import { Producciones } from "../visitor/cst.js";
+import { Producciones } from "../visitor/CST.js";
 import {Or, Concat, Hoja } from './SyntaxTree.js'
 import SyntaxTreeVisitor from "./SyntaxTreeVisitor.js";
 

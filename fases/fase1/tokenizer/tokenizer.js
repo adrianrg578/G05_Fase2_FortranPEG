@@ -1,5 +1,5 @@
 import Visitor from "../visitor/Visitor.js";
-import { Rango } from "../visitor/cst.js";
+import { Rango } from "../visitor/CST.js";
 import { generateCaracteres } from "./utils.js";
 
 export default class Tokenizer extends Visitor{
