@@ -214,10 +214,12 @@ export class Identificador {
 export class Punto {
     /**
      *
-    
+     * @param {string} valor
+	 * @param {string} id
      */
-    constructor() {
-        
+    constructor(valor, id) {
+        this.valor = valor;
+		this.id = id;
     }
 
     /**
@@ -237,10 +239,12 @@ export class Punto {
 export class Fin {
     /**
      *
-    
+     * @param {string} valor
+	 * @param {string} id
      */
-    constructor() {
-        
+    constructor(valor, id) {
+        this.valor = valor;
+		this.id = id;
     }
 
     /**

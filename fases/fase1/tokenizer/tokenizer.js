@@ -43,7 +43,7 @@ export default class Tokenizer extends Visitor{
             return codString;
         }
     } ; 
-    //falta implementar
+
     visitClase(node){
         return `
     i = cursor
@@ -56,7 +56,7 @@ export default class Tokenizer extends Visitor{
         .join('\n')}
         `;
     }
-    // falta implementar
+
     visitRango(node){ 
         const rango = `
     if (input(i:i) >= "${node.bottom}" .and. input(i:i) <= "${node.top}") then

@@ -71,10 +71,10 @@ expresiones
     return new n.Clase(chars, bandera);
   }
   / "." {
-    return new n.Punto();
+    return new n.Punto('.','punto');
   }
   / "!." {
-    return new n.Fin();
+    return new n.Fin('!.','fin');
   }
 
 // conteo = "|" parteconteo _ (_ delimitador )? _ "|"
@@ -102,7 +102,9 @@ contenidoClase
   / $caracter
 
 caracter
-  = [^\[\]\\]
+  = [^\[\]\\]{
+
+  }
   / "\\" .
 
 literales
@@ -138,7 +140,7 @@ secuenciaFinLinea = "\r\n" / "\n" / "\r" / "\u2028" / "\u2029"
 //     "\"" [^"]* "\""
 //     / "'" [^']* "'"
     
-numero = [0-9]+ {return text()}  
+numero = num:$[0-9]+ {return parseInt(num, 10)}
 
 identificador = [_a-z]i[_a-z0-9]i* { return text() }
 
